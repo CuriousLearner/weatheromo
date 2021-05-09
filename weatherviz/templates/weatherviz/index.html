@@ -2,8 +2,8 @@
 <html>
   <head>
     <script
-      src="https://code.jquery.com/jquery-3.6.0.min.js"
-      integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+      src="https://code.jquery.com/jquery-3.6.0.js"
+      integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
       crossorigin="anonymous"
     ></script>
     <!--Import Google Icon Font-->
@@ -48,6 +48,13 @@
     </nav>
 
     <div class="container">
+      <form action="{% url 'city-weather' %}" method="POST">
+        {% csrf_token %} {{ form.as_p }}
+
+        <input type="submit" value="Submit" />
+      </form>
+
+      {% if weather_data %}
       <div class="center">
         <div style="font-size: 48px">
           {{ weather_data.name }} {{ weather_data.country }}
@@ -113,6 +120,7 @@
         </tr>
       </table>
     </div>
+    {% else %} {% endif %}
 
     <footer class="page-footer">
       <div class="footer-copyright">
@@ -127,5 +135,11 @@
 
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+    <script>
+      $(document).ready(function () {
+        $("select").formSelect();
+      });
+    </script>
   </body>
 </html>
