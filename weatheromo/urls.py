@@ -16,6 +16,9 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+from weatherviz.views import view_weather_data_for_city
+
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', view_weather_data_for_city, name="city-weather")
 ]
